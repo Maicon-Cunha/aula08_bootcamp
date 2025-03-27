@@ -19,7 +19,19 @@ def calcular_kpi_vendas(df: pd.DataFrame) -> pd.DataFrame:
 
 # uma funcao que da load em csv ou parquet
 
-if __name__ == "__main__":
-    pasta_argumento = "data"
-    data_frame = extrair_dados_e_consolidar(pasta=pasta_argumento)
-    print(calcular_kpi_vendas(data_frame))
+def carregar_dados(df: pd.DataFrame, format_saida: list):
+    """
+    parametro que vai ser ou "csv" ou "parquet" ou "os dois"
+    """
+    print(format_saida)
+    for formato in format_saida:
+        if formato == "csv":
+            df.to_csv("dados.csv")
+        if formato == "parquet":
+            df.to_parquet("dados.parquet")
+
+
+    if __name__ == "__main__":
+        pasta_argumento = "data"
+        data_frame = extrair_dados_e_consolidar(pasta=pasta_argumento)
+        print(calcular_kpi_vendas(data_frame))
